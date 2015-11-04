@@ -4,23 +4,23 @@ namespace v1\Globs\Jira\Api\Client;
 
 class Credentials implements CredentialsInterface
 {
-    public function __construct()
-    {
-    }
+    private $user_id;
+    private $password;
 
-    public function getCredentials()
+    public function __construct($user_id, $password)
     {
-        // TODO: Implement getCredentials() method.
+        $this->user_id = $user_id;
+        $this->password = $password;
     }
 
     public function getId()
     {
-        // TODO: Implement getId() method.
+        return $this->user_id;
     }
 
     public function getPassword()
     {
-        // TODO: Implement getPassword() method.
+        return $this->password;
     }
 
 }
