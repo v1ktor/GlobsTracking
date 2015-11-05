@@ -33,8 +33,33 @@ class Jira
         return $this->endpoint;
     }
 
+    public function getGlobDefects()
+    {
+        $options = array(
+            "jql" => "project = AIW16 AND issuetype = \"Software Defect\" AND status in (\"Open - On Hold\", \"Open - Glob\") AND \"US DTS ID\" is not EMPTY",
+            "maxResults" => -1,
+        );
+
+        $data = $this->api(self::REQUEST_GET, "/rest/api/2/search", $options);
+
+        $issues = array();
+        if (isset($data["issues"])) {
+            foreach ($data["issues"] as $issue) {
+                $issues[] = $issue;
+            }
+        }
+
+        return $issues;
+    }
+
     public function api($method = self::REQUEST_GET, $url, $data = array(), $return_as_json = false, $debug = false)
     {
-        return $result = $this->client->sendRequest($method, $url, $data, $this->getEndpoint(), $this->credentials, $debug);
+        $result = $this->client->sendRequest($method, $url, $data, $this->getEndpoint(), $this->credentials, $debug);
+
+        if ($return_as_json == false) {
+            return json_decode($result, true);
+        } else {
+            return $result;
+        }
     }
 }
