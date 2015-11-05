@@ -16,6 +16,8 @@ class CurlClient implements ClientInterface
             $url .= "?" . http_build_query($data);
         }
 
+        var_dump($url);
+
         curl_setopt($curl, CURLOPT_URL, $endpoint . $url);
         curl_setopt($curl, CURLOPT_HEADER, 0);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
@@ -41,7 +43,7 @@ class CurlClient implements ClientInterface
         $error_number = curl_errno($curl);
         if ($error_number > 0) {
             throw new \Exception (
-                sprintf("Jira requiest failed: code = %s, '%s'", $error_number, curl_errno($curl))
+                sprintf("Jira request failed: code = %s, '%s'", $error_number, curl_errno($curl))
             );
         }
 
