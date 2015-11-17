@@ -15,7 +15,7 @@ require_once 'src/Globs/Helper.php';
 $jira = new v1\Globs\Jira\Jira($endpoint, new \v1\Globs\Jira\Api\Client\Credentials($username, $password));
 $helper = new v1\Globs\Helper();
 
-$jql = "asdasdasdproject = AIW16 AND issuetype = \"Software Defect\" AND status in (\"Open - On Hold\", \"Open - Glob\") AND \"US DTS ID\" is not EMPTY";
+$jql = "project = " . $project . " AND issuetype = \"Software Defect\" AND status in (\"Open - On Hold\", \"Open - Glob\") AND \"US DTS ID\" is not EMPTY";
 
 $data = $jira->query($jql);
 
