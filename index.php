@@ -13,11 +13,20 @@ require_once 'src/Globs/Jira/Jira.php';
 
 $jira = new v1\Globs\Jira\Jira($endpoint, new \v1\Globs\Jira\Api\Client\Credentials($username, $password));
 
-$data = $jira->getGlobDefects();
+$jql = "asdasdasdproject = AIW16 AND issuetype = \"Software Defect\" AND status in (\"Open - On Hold\", \"Open - Glob\") AND \"US DTS ID\" is not EMPTY";
 
-echo "<br>";
-foreach ($data as $issue) {
-    echo $issue["key"] . "<br>";
+$data = $jira->query($jql);
+
+echo "<br><br>";
+
+if (isset($data["errorMessages"])) {
+    foreach ($data["errorMessages"] as $errorMessage) {
+        echo "<div>" . $errorMessage . "</div>";
+    }
+} else {
+    foreach ($data as $issue) {
+        echo $issue["key"] . "<br>";
+    }
 }
 
 echo '<pre>';

@@ -33,19 +33,23 @@ class Jira
         return $this->endpoint;
     }
 
-    public function getGlobDefects()
+    public function query($jql, $max_results = -1)
     {
         $options = array(
-            "jql" => "project = AIW16 AND issuetype = \"Software Defect\" AND status in (\"Open - On Hold\", \"Open - Glob\") AND \"US DTS ID\" is not EMPTY",
-            "maxResults" => -1,
+            "jql" => $jql,
+            "maxResults" => $max_results,
         );
 
         $data = $this->api(self::REQUEST_GET, "/rest/api/2/search", $options);
 
         $issues = array();
-        if (isset($data["issues"])) {
-            foreach ($data["issues"] as $issue) {
-                $issues[] = $issue;
+        if (isset($data["errorMessages"])) {
+            $issues["errorMessages"] = $data["errorMessages"];
+        } else {
+            if (isset($data["issues"])) {
+                foreach ($data["issues"] as $issue) {
+                    $issues[] = $issue;
+                }
             }
         }
 
