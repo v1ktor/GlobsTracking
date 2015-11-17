@@ -14,12 +14,18 @@ $loader->addNamespace('GlobsTracking', 'GlobsTracking/src');
 use GlobsTracking\Globs\Helper;
 use GlobsTracking\Globs\Jira\Jira;
 use GlobsTracking\Globs\Jira\Api\Client\Credentials;
+use GlobsTracking\Globs\Rally\Rally;
+use GlobsTracking\Globs\Rally\Api\Client\Credentials as rCredentials;
 
 $jira = new Jira($endpoint, new Credentials($username, $password));
 $helper = new Helper();
 
+$rally = new Rally($rally_endpoint, new rCredentials($rally_username, $rally_password));
+$rally->getToken();
+
 $jql = "project = " . $project . " AND issuetype = \"Software Defect\" AND status in (\"Open - On Hold\", \"Open - Glob\") AND \"US DTS ID\" is not EMPTY";
 
+/*
 $data = $jira->query($jql);
 
 echo "<br><br>";
@@ -37,3 +43,4 @@ if (isset($data["errorMessages"])) {
 echo '<pre>';
 var_dump($data);
 echo '</pre>';
+*/
