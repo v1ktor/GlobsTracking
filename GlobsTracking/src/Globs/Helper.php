@@ -1,6 +1,6 @@
 <?php
 
-namespace v1\Globs;
+namespace GlobsTracking\Globs;
 
 class Helper
 {

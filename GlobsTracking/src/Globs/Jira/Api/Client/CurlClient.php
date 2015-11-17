@@ -1,6 +1,6 @@
 <?php
 
-namespace v1\Globs\Jira\Api\Client;
+namespace GlobsTracking\Globs\Jira\Api\Client;
 
 class CurlClient implements ClientInterface
 {

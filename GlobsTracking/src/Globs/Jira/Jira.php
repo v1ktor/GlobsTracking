@@ -1,9 +1,9 @@
 <?php
 
-namespace v1\Globs\Jira;
+namespace GlobsTracking\Globs\Jira;
 
-use v1\Globs\Jira\Api\Client\CredentialsInterface;
-use v1\Globs\Jira\Api\Client\CurlClient;
+use GlobsTracking\Globs\Jira\Api\Client\CredentialsInterface;
+use GlobsTracking\Globs\Jira\Api\Client\CurlClient;
 
 class Jira
 {
