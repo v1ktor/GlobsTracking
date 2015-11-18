@@ -41,7 +41,7 @@ class CurlClient implements ClientInterface
         $error_number = curl_errno($curl);
         if ($error_number > 0) {
             throw new \Exception (
-                sprintf("Jira request failed: code = %s, '%s'", $error_number, curl_errno($curl))
+                sprintf("Curl request failed: code = %s, '%s'", $error_number, curl_errno($curl))
             );
         }
 
@@ -50,11 +50,11 @@ class CurlClient implements ClientInterface
         }
 
         if ($data === '' && curl_getinfo($curl, CURLINFO_HTTP_CODE) != 204) {
-            throw new \Exception("JIRA Rest server returns unexpected result.");
+            throw new \Exception("Curl returns unexpected result.");
         }
 
         if (is_null($data)) {
-            throw new \Exception("JIRA Rest server returns unexpected result.");
+            throw new \Exception("Curl returns unexpected result.");
         }
 
         return $data;
