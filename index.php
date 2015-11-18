@@ -20,8 +20,8 @@ $jira = new Jira($endpoint, new Credentials($username, $password));
 $helper = new Helper();
 
 $rally = new Rally($rally_endpoint, new Credentials($rally_username, $rally_password));
-$rally->findWorkspace("IPG");
-$rally->findProject("InfraWorks Portfolio");
+$rally->findWorkspace($rally_workspace);
+$rally->findProject($rally_project);
 echo "<pre>";
 print_r();
 echo "</pre>";
