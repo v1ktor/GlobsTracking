@@ -1,4 +1,4 @@
-<?php namespace GlobsTracking\Globs\Rally\Api\Client;
+<?php namespace GlobsTracking\Globs\CurlClient;
 
 class Credentials implements CredentialsInterface
 {
@@ -20,4 +20,5 @@ class Credentials implements CredentialsInterface
     {
         return $this->password;
     }
+
 }

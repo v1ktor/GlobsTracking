@@ -1,4 +1,4 @@
-<?php namespace GlobsTracking\Globs\Rally\Api\Client;
+<?php namespace GlobsTracking\Globs\CurlClient;
 
 interface CredentialsInterface
 {

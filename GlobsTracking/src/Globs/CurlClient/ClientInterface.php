@@ -1,6 +1,4 @@
-<?php
-
-namespace GlobsTracking\Globs\Jira\Api\Client;
+<?php namespace GlobsTracking\Globs\CurlClient;
 
 interface ClientInterface
 {

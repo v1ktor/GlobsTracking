@@ -1,8 +1,7 @@
-<?php namespace GlobsTracking\Globs\Rally\Api\Client;
+<?php namespace GlobsTracking\Globs\CurlClient;
 
 class CurlClient implements ClientInterface
 {
-
     public function __construct()
     {
     }
@@ -14,6 +13,8 @@ class CurlClient implements ClientInterface
         if ($method == "GET") {
             $url .= "?" . http_build_query($data);
         }
+
+        var_dump($url);
 
         curl_setopt($curl, CURLOPT_URL, $endpoint . $url);
         curl_setopt($curl, CURLOPT_HEADER, 0);
@@ -40,7 +41,7 @@ class CurlClient implements ClientInterface
         $error_number = curl_errno($curl);
         if ($error_number > 0) {
             throw new \Exception (
-                sprintf("Rally request failed: code = %s, '%s'", $error_number, curl_errno($curl))
+                sprintf("Jira request failed: code = %s, '%s'", $error_number, curl_errno($curl))
             );
         }
 
@@ -49,16 +50,14 @@ class CurlClient implements ClientInterface
         }
 
         if ($data === '' && curl_getinfo($curl, CURLINFO_HTTP_CODE) != 204) {
-            throw new \Exception("Rally Rest server returns unexpected result.");
+            throw new \Exception("JIRA Rest server returns unexpected result.");
         }
 
         if (is_null($data)) {
-            throw new \Exception("Rally Rest server returns unexpected result.");
+            throw new \Exception("JIRA Rest server returns unexpected result.");
         }
 
         return $data;
+
     }
-
-
-
 }

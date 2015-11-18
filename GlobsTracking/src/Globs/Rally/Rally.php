@@ -1,7 +1,7 @@
 <?php namespace GlobsTracking\Globs\Rally;
 
-use GlobsTracking\Globs\Rally\Api\Client\CredentialsInterface;
-use GlobsTracking\Globs\Rally\Api\Client\CurlClient;
+use GlobsTracking\Globs\CurlClient\CredentialsInterface;
+use GlobsTracking\Globs\CurlClient\CurlClient;
 
 class Rally
 {
