@@ -40,6 +40,7 @@ class Rally
      */
     private $security_token;
     private $workspace_id;
+    private $project_id;
 
     /**
      * Rally constructor.
@@ -102,7 +103,21 @@ class Rally
         $this->workspace_id = $workspace_id;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getProjectId()
+    {
+        return $this->project_id;
+    }
 
+    /**
+     * @param mixed $project_id
+     */
+    public function setProjectId($project_id)
+    {
+        $this->project_id = $project_id;
+    }
 
     /**
      * Get Rally security token
@@ -131,7 +146,7 @@ class Rally
             $subscription_objectid = $data["Subscription"]["ObjectID"];
             $data = $this->api(self::REQUEST_GET, "/subscription/" . $subscription_objectid . "/Workspaces");
         } else {
-            $data = Helper::displayErrorMessage("Could not get workspaces list");
+            echo Helper::displayErrorMessage("Could not get workspaces list");
         }
 
         return $data;
@@ -152,9 +167,48 @@ class Rally
         }
 
         if ($this->getWorkspaceId()) {
-            echo Helper::displaySuccessMessage("Workspace " . $workspace_name . " found");
+            echo Helper::displaySuccessMessage("Workspace " . $workspace_name . " is found");
         } else {
             echo Helper::displayErrorMessage("Workspace " . $workspace_name . " is not found");
+        }
+
+        return null;
+    }
+
+    /**
+     * Get list of projects for current workspace
+     * @return array|mixed
+     */
+    public function getProjects()
+    {
+        $args = array(
+            "workspace" => $this->endpoint . "/workspace/" . $this->workspace_id,
+            "fetch" => "true",
+        );
+
+        $data = $this->api(self::REQUEST_GET, "/project", $args);
+
+        return $data["QueryResult"]["Results"];
+    }
+
+    /**
+     * @param $project_name
+     * @return null
+     */
+    public function findProject($project_name)
+    {
+        $projects = $this->getProjects();
+
+        foreach ($projects as $project) {
+            if ($project["_refObjectName"] == $project_name) {
+                $this->setProjectId($project["ObjectID"]);
+            }
+        }
+
+        if ($this->getProjectId()) {
+            echo Helper::displaySuccessMessage("Project " . $project_name . " is found");
+        } else {
+            echo Helper::displayErrorMessage("Project " . $project_name . " is not found");
         }
 
         return null;
