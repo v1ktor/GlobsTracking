@@ -2,6 +2,7 @@
 
 use GlobsTracking\Globs\CurlClient\CredentialsInterface;
 use GlobsTracking\Globs\CurlClient\CurlClient;
+use GlobsTracking\Globs\Helper;
 
 /**
  * Class Rally
@@ -34,9 +35,10 @@ class Rally
      */
     private $endpoint;
     /**
-     * @var Rally Security Token
+     * Rally Security Token
+     * @var
      */
-    private $securityToken;
+    private $security_token;
 
     /**
      * Rally constructor.
@@ -72,15 +74,15 @@ class Rally
      */
     public function getSecurityToken()
     {
-        return $this->securityToken;
+        return $this->security_token;
     }
 
     /**
-     * @param mixed $securityToken
+     * @param mixed $security_token
      */
-    public function setSecurityToken($securityToken)
+    public function setSecurityToken($security_token)
     {
-        $this->securityToken = $securityToken;
+        $this->security_token = $security_token;
     }
 
     /**
@@ -96,6 +98,24 @@ class Rally
         }
 
         return null;
+    }
+
+    /**
+     * Get list off all Rally workspaces
+     * @return array|mixed
+     */
+    public function getWorkspaces()
+    {
+        $data = $this->api(self::REQUEST_GET, "/subscription");
+
+        if (isset($data["Subscription"]["ObjectID"])) {
+            $subscription_objectid = $data["Subscription"]["ObjectID"];
+            $data = $this->api(self::REQUEST_GET, "/subscription/" . $subscription_objectid . "/Workspaces");
+        } else {
+            Helper::displayErrorMessage("No workspaces found");
+        }
+
+        return $data;
     }
 
     /**

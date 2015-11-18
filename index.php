@@ -20,7 +20,7 @@ $jira = new Jira($endpoint, new Credentials($username, $password));
 $helper = new Helper();
 
 $rally = new Rally($rally_endpoint, new Credentials($rally_username, $rally_password));
-$rally->getToken();
+$rally->getWorkspaces();
 
 $jql = "project = " . $project . " AND issuetype = \"Software Defect\" AND status in (\"Open - On Hold\", \"Open - Glob\") AND \"US DTS ID\" is not EMPTY";
 
