@@ -215,6 +215,24 @@ class Rally
     }
 
     /**
+     * @param $defect_id
+     * @return array|mixed
+     */
+    public function findDefect($defect_id)
+    {
+        $args = array(
+            "workspace" => $this->endpoint . "/workspace/" . $this->workspace_id,
+            "project" => $this->endpoint . "/project/" . $this->project_id,
+            "query" => "(FormattedID = " . $defect_id . ")",
+            "fetch" => "true",
+        );
+
+        $data = $this->api(self::REQUEST_GET, "/defect", $args);
+
+        return $data;
+    }
+
+    /**
      * Method to send requests to REST API SERVER
      * @param string $method
      * @param $url

@@ -23,7 +23,7 @@ $rally = new Rally($rally_endpoint, new Credentials($rally_username, $rally_pass
 $rally->findWorkspace($rally_workspace);
 $rally->findProject($rally_project);
 echo "<pre>";
-print_r();
+$rally->findDefect($sample_bug_id);
 echo "</pre>";
 
 $jql = "project = " . $project . " AND issuetype = \"Software Defect\" AND status in (\"Open - On Hold\", \"Open - Glob\") AND \"US DTS ID\" is not EMPTY";
