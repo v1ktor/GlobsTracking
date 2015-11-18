@@ -39,6 +39,7 @@ class Rally
      * @var
      */
     private $security_token;
+    private $workspace_id;
 
     /**
      * Rally constructor.
@@ -86,6 +87,24 @@ class Rally
     }
 
     /**
+     * @return mixed
+     */
+    public function getWorkspaceId()
+    {
+        return $this->workspace_id;
+    }
+
+    /**
+     * @param mixed $workspace_id
+     */
+    public function setWorkspaceId($workspace_id)
+    {
+        $this->workspace_id = $workspace_id;
+    }
+
+
+
+    /**
      * Get Rally security token
      * @return null
      */
@@ -112,10 +131,33 @@ class Rally
             $subscription_objectid = $data["Subscription"]["ObjectID"];
             $data = $this->api(self::REQUEST_GET, "/subscription/" . $subscription_objectid . "/Workspaces");
         } else {
-            Helper::displayErrorMessage("No workspaces found");
+            $data = Helper::displayErrorMessage("Could not get workspaces list");
         }
 
         return $data;
+    }
+
+    /**
+     * @param $workspace_name
+     * @return null
+     */
+    public function findWorkspace($workspace_name)
+    {
+        $workspaces = $this->getWorkspaces();
+
+        foreach ($workspaces["QueryResult"]["Results"] as $workspace) {
+            if ($workspace["_refObjectName"] == $workspace_name) {
+                $this->setWorkspaceId($workspace["ObjectID"]);
+            }
+        }
+
+        if ($this->getWorkspaceId()) {
+            echo Helper::displaySuccessMessage("Workspace " . $workspace_name . " found");
+        } else {
+            echo Helper::displayErrorMessage("Workspace " . $workspace_name . " is not found");
+        }
+
+        return null;
     }
 
     /**
