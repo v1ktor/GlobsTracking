@@ -14,8 +14,6 @@ class CurlClient implements ClientInterface
             $url .= "?" . http_build_query($data);
         }
 
-        var_dump($url);
-
         curl_setopt($curl, CURLOPT_URL, $endpoint . $url);
         curl_setopt($curl, CURLOPT_HEADER, 0);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);

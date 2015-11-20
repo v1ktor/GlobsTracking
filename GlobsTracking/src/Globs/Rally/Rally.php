@@ -49,7 +49,7 @@ class Rally
      */
     public function __construct($endpoint, CredentialsInterface $credentials)
     {
-        $endpoint = $endpoint . "/slm/webservice/" . self::VERSION;
+        $endpoint = rtrim($endpoint, "/") . "/slm/webservice/" . self::VERSION;
         $this->setEndpoint($endpoint);
         $this->credentials = $credentials;
         $this->client = new CurlClient();

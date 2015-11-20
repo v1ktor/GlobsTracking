@@ -28,22 +28,16 @@ echo "</pre>";
 
 $jql = "project = " . $project . " AND issuetype = \"Software Defect\" AND status in (\"Open - On Hold\", \"Open - Glob\") AND \"US DTS ID\" is not EMPTY";
 
-/*
+$bugs = array();
 $data = $jira->query($jql);
 
-echo "<br><br>";
-
-if (isset($data["errorMessages"])) {
-    foreach ($data["errorMessages"] as $errorMessage) {
-        echo $helper->displayErrorMessage($errorMessage);
-    }
-} else {
-    foreach ($data as $issue) {
-        echo $issue["key"] . "<br>";
-    }
+$callStartTime = microtime(true);
+echo "<pre>";
+for ($i = 0; $i <= sizeof($data); $i++) {
+     $bugs[$i]["rally"] = $rally->findDefect($data[$i]["fields"]["customfield_10090"]);
 }
-
-echo '<pre>';
-var_dump($data);
-echo '</pre>';
-*/
+var_dump($bugs);
+echo "</pre>";
+$callEndTime = microtime(true);
+$callTime = $callEndTime - $callStartTime;
+echo 'Call time to run query was ' . sprintf('%.4f',$callTime) . " seconds";
