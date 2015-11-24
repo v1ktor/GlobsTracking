@@ -38,8 +38,10 @@ class Jira
             "maxResults" => $max_results,
         );
 
-        $data = $this->api(self::REQUEST_GET, "/rest/api/2/search", $options);
+        $data = $this->api(self::REQUEST_GET, "/rest/api/2/search", $options, true);
+        return $data;
 
+        /*
         $issues = array();
         if (isset($data["errorMessages"])) {
             $issues["errorMessages"] = $data["errorMessages"];
@@ -52,6 +54,7 @@ class Jira
         }
 
         return $issues;
+        */
     }
 
     public function api($method = self::REQUEST_GET, $url, $data = array(), $return_as_json = false, $debug = false)

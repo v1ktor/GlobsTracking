@@ -167,9 +167,9 @@ class Rally
         }
 
         if ($this->getWorkspaceId()) {
-            echo Helper::displaySuccessMessage("Workspace " . $workspace_name . " is found");
+            // echo Helper::displaySuccessMessage("Workspace " . $workspace_name . " is found");
         } else {
-            echo Helper::displayErrorMessage("Workspace " . $workspace_name . " is not found");
+            // echo Helper::displayErrorMessage("Workspace " . $workspace_name . " is not found");
         }
 
         return null;
@@ -206,9 +206,9 @@ class Rally
         }
 
         if ($this->getProjectId()) {
-            echo Helper::displaySuccessMessage("Project " . $project_name . " is found");
+            // echo Helper::displaySuccessMessage("Project " . $project_name . " is found");
         } else {
-            echo Helper::displayErrorMessage("Project " . $project_name . " is not found");
+            // echo Helper::displayErrorMessage("Project " . $project_name . " is not found");
         }
 
         return null;
