@@ -1,0 +1,15 @@
+{% if bugs.errors is defined %}
+    {% for error in bugs.errors %}
+    <div class="message message_error">{{ error }}</div>
+    {% endfor %}
+{% else %}
+<table>
+    <tbody>
+    {% for bug in bugs %}
+    <tr>
+        <td>{{ bug.jira_id }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endif %}

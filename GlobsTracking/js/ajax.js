@@ -3,8 +3,8 @@ function getXMLHttpRequestObject()
     var ajax = null;
     if (window.XMLHttpRequest) {
         ajax = new XMLHttpRequest();
-    } else if (window.ActiveXObject) {
-        ajax = new ActiveXObject("MSXML2.XMLHTTP.3.0");
+    } else {
+        alert("Your browser doesn't support XMLHttpRequest object");
     }
 
     return ajax;
@@ -12,7 +12,6 @@ function getXMLHttpRequestObject()
 
 function run()
 {
-    var progressBar = document.getElementById("progressBar");
     var xhr = getXMLHttpRequestObject();
 
     xhr.onreadystatechange = function() {
@@ -28,19 +27,18 @@ function run()
     xhr.addEventListener("progress",function(evt) {
         if (evt.lengthComputable) {
             console.log(evt.loaded + ' / ' + evt.total);
-            progressBar.value = 100 * evt.loaded / evt.total;
         }
     })
 
     xhr.addEventListener("loadstart",function(evt) {
-        document.getElementById("progressBar").removeAttribute("value");
+        NProgress.start();
     })
 
     xhr.onloadend = function(evt) {
-        progressBar.value = evt.loaded;
+        NProgress.done();
     }
 
-    var url = "/test.php";
+    var url = "/defect/getjiraglobs";
     xhr.open("GET", url, true);
     xhr.send(null);
 }
