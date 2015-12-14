@@ -23,6 +23,7 @@
             overflow: auto;
             padding: 1em 1em 1.5em;
             display: inline-block;
+            box-sizing: border-box;
         }
         .button {
             box-shadow: 0 4px 0 rgba(31, 116, 173, 1);
@@ -35,6 +36,7 @@
             border: 1px solid #3498db;
             color: #f9f9f9;
             background-color: #3498db;
+            outline: 0;
         }
         .button:active {
             position: relative;
@@ -58,6 +60,12 @@
             color: #f9f9f9;
             background-color: #9b59b6;
         }
+        .button_alizarin {
+            box-shadow: 0 4px 0 rgba(192, 57, 43,1.0);
+            border-color: #e74c3c;
+            color: #f9f9f9;
+            background-color: #e74c3c;
+        }
         .message {
             padding: 15px;
             margin-bottom: 2em;
@@ -68,15 +76,40 @@
             color: #a94442;
             background-color: #f2dede;
         }
+        .table {
+            font-size: 0.8em;
+            border-collapse: collapse;
+        }
+        .table tr:nth-child(2n) {
+            background-color: #f9f9f9;
+        }
+        .table tr:hover {
+            background-color: #ebebeb;
+        }
+        .table td {
+            padding: 3px 7px;
+        }
+        .table__head {
+            border: none;
+        }
+        .table__head tr:hover {
+            background: none;
+        }
+        .table__head-heading_summary {
+            width: 200px;
+        }
     </style>
 </head>
 <body>
 
 <div class="nav">
-    <a href="#" class="button" onclick="">Show all GLOB defects</a>
+    <a href="#" class="button button_alizarin" onclick="">Show all GLOB defects</a>
+    <span style="margin: 0 0.5em;"></span>
     <a href="#" class="button" onclick="run()">Show JIRA GLOB defects</a>
     <a href="#" class="button">Show Rally GLOB defects</a>
+    <span style="margin: 0 0.5em;"></span>
     <a href="#" class="button button_emerald">Export as .xlsx</a>
+    <span style="margin: 0 0.5em;"></span>
     <a href="#" class="button button_amethyst">Transfer GLOB defect</a>
     <a href="#" class="button button_amethyst">Transfer LOC defect</a>
 </div>

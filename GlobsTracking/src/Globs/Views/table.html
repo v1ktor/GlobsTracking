@@ -3,11 +3,24 @@
     <div class="message message_error">{{ error }}</div>
     {% endfor %}
 {% else %}
-<table>
+<table class="table">
+    <thead class="table__head">
+    <tr>
+        <th class="table__head-heading">Jira ID</th>
+        <th class="table__head-heading">Lang</th>
+        <th class="table__head-heading">Component</th>
+        <th class="table__head-heading table__head-heading_summary">Summary</th>
+        <th class="table__head-heading">Rally ID</th>
+    </tr>
+    </thead>
     <tbody>
     {% for bug in bugs %}
     <tr>
         <td>{{ bug.jira_id }}</td>
+        <td>{{ bug.lang }}</td>
+        <td>{{ bug.component }}</td>
+        <td>{{ bug.summary }}</td>
+        <td>{{ bug.rally_id }}</td>
     </tr>
     {% endfor %}
     </tbody>

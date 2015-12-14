@@ -31,13 +31,22 @@ class DefectController extends FrontController
 
         $data = $this->jira->query($jql);
         $data = json_decode($data);
+        echo "<pre>";
+        var_dump($data);
+        echo "</pre>";
         $bugs = array();
+        $i = 0;
 
         if (isset($data->errorMessages)) {
             $bugs["errors"] = $data->errorMessages;
         } else {
             foreach ($data->issues as $issue) {
-                $bugs[]["jira_id"] = $issue->key;
+                $bugs[$i]["jira_id"] = $issue->key;
+                $bugs[$i]["lang"] = $issue->fields->customfield_10007->value;
+                $bugs[$i]["component"] = $issue->fields->customfield_10011->value;
+                $bugs[$i]["summary"] = $issue->fields->summary;
+                $bugs[$i]["rally_id"] = $issue->fields->customfield_10090;
+                $i++;
             }
         }
 
