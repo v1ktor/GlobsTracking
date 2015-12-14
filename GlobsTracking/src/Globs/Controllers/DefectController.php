@@ -31,9 +31,6 @@ class DefectController extends FrontController
 
         $data = $this->jira->query($jql);
         $data = json_decode($data);
-        echo "<pre>";
-        var_dump($data);
-        echo "</pre>";
         $bugs = array();
         $i = 0;
 
