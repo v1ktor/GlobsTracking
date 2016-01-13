@@ -3,16 +3,19 @@
 use GlobsTracking\Globs\FrontController;
 use GlobsTracking\Globs\Jira\Jira;
 use GlobsTracking\Globs\CurlClient\Credentials;
+use GlobsTracking\Globs\Rally\Rally;
 
 class DefectController extends FrontController
 {
     private $jira;
+    private $rally;
 
     public function __construct()
     {
         parent::__construct();
         include("credentials.php");
         $this->jira = new Jira($endpoint, new Credentials($username, $password));
+        $this->rally = new Rally($rally_endpoint, new Credentials($rally_username, $rally_password));
     }
 
     public function index(){
@@ -33,6 +36,9 @@ class DefectController extends FrontController
         $data = json_decode($data);
         $bugs = array();
         $i = 0;
+
+        $workspace = $this->rally->findWorkspace($rally_workspace);
+        $project = $this->rally->findProject($rally_project);
 
         if (isset($data->errorMessages)) {
             $bugs["errors"] = $data->errorMessages;

@@ -11,12 +11,16 @@
         <th class="table__head-heading">Component</th>
         <th class="table__head-heading table__head-heading_summary">Summary</th>
         <th class="table__head-heading">Rally ID</th>
+        <th class="table__head-heading">Rally Status</th>
+        <th class="table__head-heading">Rally Resolution</th>
+        <th class="table__head-heading">Rally Shedule State</th>
+        <th class="table__head-heading">Rally Team</th>
     </tr>
     </thead>
     <tbody>
     {% for bug in bugs %}
     <tr>
-        <td>{{ bug.jira_id }}</td>
+        <td><a href="#" class="link">{{ bug.jira_id }}</a></td>
         <td>{{ bug.lang }}</td>
         <td>{{ bug.component }}</td>
         <td>{{ bug.summary }}</td>
